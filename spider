@@ -1,0 +1,5 @@
+import requests
+import pandas
+from bs4 import BeautifulSoup
+url = 'www.baidu.com'
+headers = {'user-agent':''}
