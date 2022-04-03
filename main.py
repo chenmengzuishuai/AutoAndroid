@@ -6,11 +6,10 @@ import uiautomator2 as u2
 from tencentAiChat import *
 import threading
 import queue
+import socket
 
 
 
-
-'''
 def send_server():
     socket1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     socket1.connect(('101.34.28.245',8000))
@@ -19,10 +18,6 @@ def send_server():
         socket1.send(b'%s' % message)
 send = send_server()
 send.send(None)
-
-
-
-'''
 
 
 
@@ -95,6 +90,7 @@ def check():
 
 
 def reply_chat(n):
+    send.send(b'Get into function replpy_chat')
     replyMessage = ""
     t = 1
     newsList = d(resourceId="com.immomo.momo:id/message_layout_rightcontainer")
@@ -106,7 +102,6 @@ def reply_chat(n):
                     d(text="复制文本").click()
                 elif d(text="删除消息").exists:
                     d(text="删除消息").click()
-
                 replyMessage = replyMessage + tencentchat(d.clipboard)
 
                 t = t+1
@@ -129,14 +124,15 @@ def reply_chat(n):
             d(text="删除消息").click()
         replyMessage = tencentchat(d.clipboard)
 
+    send.send(b'Get reply message %s from tencentAi' % replyMessage)
+
     if replyMessage == "":
         d(text="请输入消息...").click_exists()
-        d.clear_text()
         d(text="请输入消息...").send_keys("啥")
         d(text="发送").click_exists()
     else:
         d(text="请输入消息...").click_exists()
-        d.clear_text()
+        send.send(b'Input reply message')
         d(text="请输入消息...").send_keys(replyMessage)
         d(text="发送").click_exists()
     return True
@@ -192,12 +188,14 @@ def mo_scroll():
 IgnoreNickName = ['互动通知','动态小助手','订阅内容','MOMO会员中心','MOMO动态小助手']
 
 def select():
+    send.send(b'Run into function select')
     c = check()
     c.send(None)
     message = "R-com.immomo.momo:id/chatlist_item_tv_status_new"
     while True:
         result = c.send(message)
         if result:
+            send.send(b'Chatlist status new exsit')
             unread = get_center(d(resourceId="com.immomo.momo:id/chatlist_item_tv_status_new")[0])
             # unreadQueue = queue.Queue(1)
             # c = threading.Thread(target=get_center,args=(d(resourceId="com.immomo.momo:id/chatlist_item_tv_status_new")[0],unreadQueue))
@@ -206,6 +204,7 @@ def select():
 
             d.click(320,unread[-1])
             if d.wait_activity("com.immomo.momo.message.activity.ChatActivity"):
+                send.send(b'Get into chat activity')
                 reply_chat(int(unread[0]))
                 while not d(text="消息").exists:
                     d.press("back")
@@ -275,9 +274,11 @@ def action():
                     if notice_count == int(d(resourceId="com.immomo.momo:id/tab_item_tv_badge").get_text()):
                         return
                     message = 'RGT-com.immomo.momo:id/tab_item_tv_badge'  # 底部消息控件角标红色未读消息控件
+                    send.send(b'Unread messages corner mark at buttom exists')
                     result = c.send(message)
                     if not result:
                         return
+                    send.send(b'Unread message count:%s' % result)
                     select()
                     mo_scroll()
 
