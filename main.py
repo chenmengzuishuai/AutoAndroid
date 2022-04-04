@@ -124,7 +124,7 @@ def reply_chat(n):
             d(text="删除消息").click()
         replyMessage = tencentchat(d.clipboard)
 
-    send.send(b'Get reply message %s from tencentAi' % replyMessage)
+    send.send(b'Get reply message %b from tencentAi' % bytes(replyMessage,'utf-8'))
 
     if replyMessage == "":
         d(text="请输入消息...").click_exists()
@@ -278,7 +278,9 @@ def action():
                     result = c.send(message)
                     if not result:
                         return
-                    send.send(b'Unread message count:%s' % result)
+                    else:
+
+                        send.send(b'Unread message count:%b' % bytes(result,'utf-8'))
                     select()
                     mo_scroll()
 
