@@ -1,8 +1,7 @@
 # -*- coding=utf-8 -*-
 # author:MC
 import time
-import os
-import uiautomator2 as u2
+from connect import d
 from tencentAiChat import *
 import threading
 import queue
@@ -10,27 +9,12 @@ import socket
 
 
 
-def send_server():
-    socket1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    socket1.connect(('101.34.28.245',8000))
-    while True:
-        message = yield
-        socket1.send(b'%s' % message)
-send = send_server()
-send.send(None)
-
 
 
 MOMO = "com.immomo.momo"
 MoChatActivity = "com.immomo.momo.message.activity.ChatActivity"
 MoMainActivity = "com.immomo.momo.maintab.MaintabActivity"
 
-
-if os.name == 'nt':
-    d = u2.connect()
-    print(d.info)
-else:
-    d = u2.connect("0.0.0.0")
 
 
 d.press("home")
