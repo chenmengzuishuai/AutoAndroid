@@ -1,5 +1,7 @@
 import socket
 import time
+import logging
+
 
 def send_server():
     socket1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
