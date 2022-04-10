@@ -133,8 +133,8 @@ def reply_hello():
         for each in d(resourceId="com.immomo.momo:id/tv_plain_text"):
             reciveMessage = reciveMessage + each.get_text()
         d(resourceId="com.immomo.momo:id/rl_middle").click()
-        d(text="回复开始聊天").click_exists(timeout=3)
-        d(text="回复开始聊天").set_text(tencentchat(reciveMessage))
+        d(text="回复即可开始聊天").click_exists(timeout=3)
+        d(text="回复即可开始聊天").set_text(tencentchat(reciveMessage))
         while d(text="发送").exists:
             d(text="发送").click()
             time.sleep(0.5)
