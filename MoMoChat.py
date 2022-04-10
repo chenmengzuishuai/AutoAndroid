@@ -182,7 +182,7 @@ def select():
 
             if d.wait_activity("com.immomo.momo.message.activity.ChatActivity"):
                 WebSocket.send(b'Get into chat activity')
-                if d(text="请输入消息").exists:
+                if d(text="请输入消息...").exists:
                     reply_chat(int(unread[0]))
                 while not d(text="消息").exists:
                     d.press("back")
