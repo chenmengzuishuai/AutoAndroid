@@ -4,8 +4,6 @@ from MoMoChat import *
 
 
 
-
-
 if __name__ == "__main__":
 
 
@@ -18,8 +16,9 @@ if __name__ == "__main__":
         except Exception as e:
 
             d.app_stop(MOMO)
+            WebSocket.send(e)
 
-            print(e)
+
 
 
 
