@@ -101,15 +101,15 @@ def reply_chat(n):
 
     if replyMessage == "":
         d(text="请输入消息...").click_exists()
-        d(text="请输入消息...").send_keys("啥")
+        d(text="请输入消息...").send_text("啥")
         time.sleep(0.5)
-        d(text="发送").click_exists()
+        d(text="发送").click_exists(timeout=3)
     else:
         d(text="请输入消息...").click_exists()
         WebSocket.send(b'Input reply message')
-        d(text="请输入消息...").send_keys(replyMessage)
+        d(text="请输入消息...").send_text(replyMessage)
         time.sleep(0.5)
-        d(text="发送").click_exists()
+        d(text="发送").click_exists(timeout=3)
     return True
 
 def reply_hello():
@@ -131,7 +131,7 @@ def reply_hello():
             reciveMessage = reciveMessage + each.get_text()
         d(resourceId="com.immomo.momo:id/rl_middle").click()
         #d(text="回复开始聊天").click()
-        d.send_keys(tencentchat(reciveMessage))
+        d.send_text(tencentchat(reciveMessage))
         d(text="发送").click_exists()
     return
 
