@@ -32,7 +32,12 @@ def tencentchat(question):
         resp = client.ChatBot(req)
         replyStr = resp.to_json_string()
         replyStr = json.loads(replyStr)
-        return replyStr["Reply"]
+        replyStr = replyStr["Reply"]
+        if "腾讯" in replyStr:
+            replyStr.replace("腾讯","")
+        if "小龙女" in replyStr:
+            replyStr = "小芸"
+        return replyStr
     except TencentCloudSDKException as err:
         print(err)
 
