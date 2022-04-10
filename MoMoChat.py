@@ -75,7 +75,7 @@ def reply_chat(n):
                     d(text="复制文本").click()
                 elif d(text="删除消息").exists:
                     d(text="删除消息").click()
-                replyMessage = replyMessage + tencentchat(d.clipboard)
+                replyMessage = replyMessage + tencentchat(d.clipboard)+"\n"
 
                 t = t+1
         except Exception as e:
@@ -102,11 +102,13 @@ def reply_chat(n):
     if replyMessage == "":
         d(text="请输入消息...").click_exists()
         d(text="请输入消息...").send_keys("啥")
+        time.sleep(0.5)
         d(text="发送").click_exists()
     else:
         d(text="请输入消息...").click_exists()
         WebSocket.send(b'Input reply message')
         d(text="请输入消息...").send_keys(replyMessage)
+        time.sleep(0.5)
         d(text="发送").click_exists()
     return True
 
@@ -170,12 +172,9 @@ def select():
         if result:
             WebSocket.send(b'Chatlist status new exsit')
             unread = get_center(d(resourceId="com.immomo.momo:id/chatlist_item_tv_status_new")[0])
-            # unreadQueue = queue.Queue(1)
-            # c = threading.Thread(target=get_center,args=(d(resourceId="com.immomo.momo:id/chatlist_item_tv_status_new")[0],unreadQueue))
-            # c.start()
-            # c.join()
-
             d.click(320,unread[-1])
+
+
             if d.wait_activity("com.immomo.momo.message.activity.ChatActivity"):
                 WebSocket.send(b'Get into chat activity')
                 reply_chat(int(unread[0]))
@@ -186,15 +185,15 @@ def select():
                 reply_hello()
                 while not d(text="消息").exists:
                     d.press("back")
-                    time.sleep(0.5)
-            elif d(text='与MOMO动态小助手对话').exists:
-                while not d(text="消息").exists:
-                    d.press("back")
-                    time.sleep(0.5)
-            elif d(text='新朋友').exists:
-                while not d(text="消息").exists:
-                    d.press("back")
-                    time.sleep(0.5)
+            #         time.sleep(0.5)
+            # if d(text='与MOMO动态小助手对话').exists:
+            #     while not d(text="消息").exists:
+            #         d.press("back")
+            #         time.sleep(0.5)
+            # if d(text='新朋友').exists:
+            #     while not d(text="消息").exists:
+            #         d.press("back")
+            #         time.sleep(0.5)
 
             else:
                 while not d(text="消息").exists:
