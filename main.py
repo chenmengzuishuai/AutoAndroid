@@ -2,7 +2,7 @@
 # author:MC
 from MoMoChat import *
 
-
+d.set_fastinput_ime(True)
 
 if __name__ == "__main__":
 
