@@ -119,6 +119,7 @@ def reply_hello():
 
     deadline = time.time() + 180
     while time.time() < deadline:
+        time.sleep(1)
         if d(text="暂无新招呼").exists:
             return
 
@@ -156,11 +157,18 @@ def mo_scroll():
                 if d(resourceId="com.immomo.momo:id/chatlist_item_tv_name")[-1].get_text() == "收到的招呼":
                     d.long_click(292.5, 1000)
                     d(text="删除对话").click_exists()
+                    while not d(text="消息").exists:
+                        d.press("back")
+                        time.sleep(0.5)
                 if d(text="新朋友").exists:
                     d.swipe(326.4,326.6,326.6,748.4)
                 else:
                     d.long_click(292.5,1445)
                     d(text="删除对话").click_exists()
+                    if d(text="新朋友").exists:
+                        while not d(text="消息").exists:
+                            d.press("back")
+                            time.sleep(0.5)
         else:
             lastName = d(resourceId="com.immomo.momo:id/chatlist_item_tv_name")[-1].get_text()
         d.swipe(326.4,748.4,326.6,326.2)
