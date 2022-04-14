@@ -65,6 +65,8 @@ def check():
 def reply_chat(n):
     WebSocket.send(b'Get into function replpy_chat')
     replyMessage = ""
+    d.swipe(326.4, 748.4, 326.6, 326.6)
+    d.swipe(326.4, 748.4, 326.6, 326.6)
     t = 1
     newsList = d(resourceId="com.immomo.momo:id/message_layout_rightcontainer")
     if len(newsList) >= n:
@@ -137,7 +139,7 @@ def reply_hello():
         d(text="回复即可开始聊天").click_exists(timeout=3)
         d(text="回复即可开始聊天").set_text(tencentchat(reciveMessage))
         while d(text="发送").exists:
-            d(text="发送").click()
+            d(text="发送").click_exists()
             time.sleep(0.5)
     return
 
