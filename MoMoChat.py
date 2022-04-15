@@ -77,7 +77,18 @@ def reply_chat(n):
                     d(text="复制文本").click()
                 elif d(text="删除消息").exists:
                     d(text="删除消息").click()
-                replyMessage = replyMessage + tencentchat(d.clipboard)+"\n"
+                replyMessage = tencentchat(d.clipboard)
+                if replyMessage == "":
+                    d(text="请输入消息...").click_exists()
+                    d(text="请输入消息...").set_text("啥")
+                    d(text="发送").click_exists(timeout=3)
+
+                else:
+                    d(text="请输入消息...").click_exists()
+                    WebSocket.send(b'Input reply message')
+                    d(text="请输入消息...").set_text(replyMessage)
+                    d(text="发送").click_exists(timeout=3)
+
 
                 t = t+1
         except Exception as e:
@@ -88,7 +99,18 @@ def reply_chat(n):
             elif d(text="删除消息").exists:
                 d(text="删除消息").click()
 
-            replyMessage = replyMessage + tencentchat(d.clipboard)
+            replyMessage = tencentchat(d.clipboard)
+            if replyMessage == "":
+                d(text="请输入消息...").click_exists()
+                d(text="请输入消息...").set_text("啥")
+                d(text="发送").click_exists(timeout=3)
+
+            else:
+                d(text="请输入消息...").click_exists()
+                WebSocket.send(b'Input reply message')
+                d(text="请输入消息...").set_text(replyMessage)
+                d(text="发送").click_exists(timeout=3)
+
 
 
     else:
@@ -98,23 +120,19 @@ def reply_chat(n):
         elif d(text="删除消息").exists:
             d(text="删除消息").click()
         replyMessage = tencentchat(d.clipboard)
+        if replyMessage == "":
+            d(text="请输入消息...").click_exists()
+            d(text="请输入消息...").set_text("啥")
+            d(text="发送").click_exists(timeout=3)
+
+        else:
+            d(text="请输入消息...").click_exists()
+            WebSocket.send(b'Input reply message')
+            d(text="请输入消息...").set_text(replyMessage)
+            d(text="发送").click_exists(timeout=3)
 
     WebSocket.send(b'Get reply message %b from tencentAi' % bytes(replyMessage,'utf-8'))
 
-    if replyMessage == "":
-        d(text="请输入消息...").click_exists()
-        d(text="请输入消息...").set_text("啥")
-        while d(text="发送").exists:
-
-            d(text="发送").click()
-            time.sleep(0.5)
-    else:
-        d(text="请输入消息...").click_exists()
-        WebSocket.send(b'Input reply message')
-        d(text="请输入消息...").set_text(replyMessage)
-        while d(text="发送").exists:
-            d(text="发送").click()
-            time.sleep(0.5)
     return True
 
 def reply_hello():
@@ -125,22 +143,13 @@ def reply_hello():
         if d(text="暂无新招呼").exists:
             return
 
-
-        # while not d(text="回复开始聊天").exists:
-        #     if d(text="暂无新招呼").exists:
-        #         return
-        #
-        #     d.swipe(320,703,320,305)
-
         reciveMessage = ""
         for each in d(resourceId="com.immomo.momo:id/tv_plain_text"):
             reciveMessage = reciveMessage + each.get_text()
         d(resourceId="com.immomo.momo:id/rl_middle").click()
         d(text="回复即可开始聊天").click_exists(timeout=3)
         d(text="回复即可开始聊天").set_text(tencentchat(reciveMessage))
-        while d(text="发送").exists:
-            d(text="发送").click_exists()
-            time.sleep(0.5)
+        d(text="发送").click_exists(timeout=3)
     return
 
 def mo_scroll():
@@ -201,15 +210,7 @@ def select():
                 reply_hello()
                 while not d(text="消息").exists:
                     d.press("back")
-            #         time.sleep(0.5)
-            # if d(text='与MOMO动态小助手对话').exists:
-            #     while not d(text="消息").exists:
-            #         d.press("back")
-            #         time.sleep(0.5)
-            # if d(text='新朋友').exists:
-            #     while not d(text="消息").exists:
-            #         d.press("back")
-            #         time.sleep(0.5)
+
 
             else:
                 while not d(text="消息").exists:
