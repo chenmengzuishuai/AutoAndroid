@@ -14,4 +14,3 @@ else:
     d = u2.connect("0.0.0.0")
 
 
-d.healthcheck()
