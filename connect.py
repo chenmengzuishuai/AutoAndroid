@@ -12,4 +12,4 @@ if os.name == 'nt':
     d = u2.connect()
     print(d.info)
 else:
-    d = u2.connect("0.0.0.0")
+    d = u2.connect("192.168.2.2")
