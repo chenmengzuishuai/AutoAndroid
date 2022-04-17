@@ -7,7 +7,7 @@ import queue
 from constVar import *
 
 d.press("home")
-d.healthcheck()
+
 def keep_clean():
     pass
 
