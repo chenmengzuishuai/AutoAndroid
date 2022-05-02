@@ -1,4 +1,5 @@
 # -*- coding=utf-8 -*-
+# update
 # author:MC
 from MoMoChat import *
 
