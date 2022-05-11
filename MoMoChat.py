@@ -6,6 +6,7 @@ import threading
 import queue
 from constVar import *
 
+
 d.press("home")
 
 def keep_clean():
@@ -90,6 +91,8 @@ def reply_chat(n):
 
 
                 t = t+1
+
+
         except Exception as e:
             print(e)
             d(resourceId="com.immomo.momo:id/message_layout_rightcontainer")[-1].long_click()
