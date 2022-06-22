@@ -4,7 +4,9 @@ from tencentAiChat import *
 import time
 import threading
 import queue
-from constVar import *
+from classes import *
+
+
 
 
 d.press("home")

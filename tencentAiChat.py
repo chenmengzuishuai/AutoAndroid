@@ -9,6 +9,7 @@ SECRETID = "AKIDTkljQqzrRkmWzB6k7C0XnmTt2uVpsdCU"
 
 SECRETKEY = "2oJWS7VdU5OQCguhGYaLp1wTjiQr1uVp"
 
+
 def tencentchat(question):
     try:
         cred = credential.Credential(SECRETID, SECRETKEY)
@@ -34,7 +35,7 @@ def tencentchat(question):
         replyStr = json.loads(replyStr)
         replyStr = replyStr["Reply"]
         if "腾讯" in replyStr:
-            replyStr.replace("腾讯","")
+            replyStr.replace("腾讯", "")
         if "小龙女" in replyStr:
             replyStr = "小芸"
         return replyStr

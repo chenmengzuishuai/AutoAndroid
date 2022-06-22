@@ -1,28 +1,7 @@
-# -*- coding=utf-8 -*-
-# update
-# author:MC
-from MoMoChat import *
+import re
 
-d.set_fastinput_ime(True)
+a = "adfadfdaekdfeiasdklfadf"
 
-if __name__ == "__main__":
-
-
-    while True:
-
-        try:
-            d.app_start(MOMO)
-            action()
-
-        except Exception as e:
-
-            d.app_stop(MOMO)
-            WebSocket.send(e)
-
-
-
-
-
-
-
-
+b = re.findall(r'.*(\w{3,})(\1).*', a)
+b = re.search(r'.*(\w{3,})\1.*', a)
+print(b)
