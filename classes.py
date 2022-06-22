@@ -12,7 +12,7 @@ class Couple(object):
         self.cp0 = cp0
         self.cp1 = cp1
         self.commucation = []
-
+        self.cpName = "%s&%s" % (cp0,cp1)
 
     def get_cp(self, name):
         if name == self.cp1:
@@ -20,9 +20,11 @@ class Couple(object):
         else:
             return self.cp1
 
-
     def add_chat(self, message):
         self.commucation.append({message.id: message.message})
 
 
-class Finder(object):
+class Juadger(object):
+
+
+
