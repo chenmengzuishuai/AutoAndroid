@@ -7,9 +7,9 @@ import queue
 from classes import *
 import uiautomator2 as u2
 from components import *
-import logging
+from mylog import *
 
-logging.
+
 # 包名
 MOMO = "com.immomo.momo"
 d.press("home")
@@ -18,7 +18,11 @@ d = u2.connect()
 def startmomo(device):
     d.app_stop(MOMO)
     d.app_start(MOMO)
-    return d(resourceId=buttomItem).exists(timeout=5)
+    result = d(resourceId=buttomItem).exists(timeout=5)
+    if not result:
+        logger.error("拉起应用失败")
+    return result
+
 
 def keep_clean():
     pass

@@ -5,9 +5,7 @@ from tencentcloud.common.profile.http_profile import HttpProfile
 from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException
 from tencentcloud.nlp.v20190408 import nlp_client, models
 
-SECRETID = "AKIDTkljQqzrRkmWzB6k7C0XnmTt2uVpsdCU"
 
-SECRETKEY = "2oJWS7VdU5OQCguhGYaLp1wTjiQr1uVp"
 
 
 def tencentchat(question):
