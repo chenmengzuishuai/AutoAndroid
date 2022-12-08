@@ -25,4 +25,3 @@ class Couple(object):
         self.commucation.append({message.id: message.message})
 
 
-class Finder(object):

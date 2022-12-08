@@ -5,11 +5,21 @@ import time
 import threading
 import queue
 from classes import *
+import uiautomator2 as u2
 
-
-
-
+# 包名
+MOMO = "com.immomo.momo"
 d.press("home")
+d = u2.connect()
+d.wa
+
+
+
+def start(device, package):
+    device.app_start(package)
+
+
+
 
 def keep_clean():
     pass
@@ -26,6 +36,7 @@ def get_nickname(ui,q):
 def get_center(ui):
     x,y = ui.center()
     return(ui.get_text(),x,y)
+
 
 def check():
     """
@@ -139,6 +150,7 @@ def reply_chat(n):
 
     return True
 
+
 def reply_hello():
 
     deadline = time.time() + 180
@@ -155,6 +167,7 @@ def reply_hello():
         d(text="回复即可开始聊天").set_text(tencentchat(reciveMessage))
         d(text="发送").click_exists(timeout=3)
     return
+
 
 def mo_scroll():
     lastName = ""
@@ -188,7 +201,9 @@ def mo_scroll():
             lastName = d(resourceId="com.immomo.momo:id/chatlist_item_tv_name")[-1].get_text()
         d.swipe(326.4,748.4,326.6,326.2)
 
+
 IgnoreNickName = ['互动通知','动态小助手','订阅内容','MOMO会员中心','MOMO动态小助手']
+
 
 def select():
     WebSocket.send(b'Run into function select')
