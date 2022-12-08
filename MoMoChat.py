@@ -6,20 +6,19 @@ import threading
 import queue
 from classes import *
 import uiautomator2 as u2
+from components import *
+import logging
 
+logging.
 # 包名
 MOMO = "com.immomo.momo"
 d.press("home")
 d = u2.connect()
-d.wa
 
-
-
-def start(device, package):
-    device.app_start(package)
-
-
-
+def startmomo(device):
+    d.app_stop(MOMO)
+    d.app_start(MOMO)
+    return d(resourceId=buttomItem).exists(timeout=5)
 
 def keep_clean():
     pass

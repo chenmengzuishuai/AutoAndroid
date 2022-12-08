@@ -1,3 +1,3 @@
-import re
+import logging
 
-print(re.UNICODE)
+logging.basicConfig()

@@ -3,4 +3,4 @@
 def launchApp(device, packagename):
     return device.app_start(packagename)
 
-import uiautomator2 as u2
+def wait(device, )
